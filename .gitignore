@@ -1,0 +1,10 @@
+.idea
+demo/client/target
+demo/project/project
+demo/project/target
+demo/server/logs
+demo/server/target
+demo/shared/.js
+demo/shared/.jvm
+project/project
+target
