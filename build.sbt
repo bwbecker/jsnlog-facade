@@ -5,13 +5,13 @@ name := "JSNLog Facade"
 
 normalizedName := "jsnlog-facade"
 
-version := "0.1.0-SNAPSHOT"
+version := "0.1.0"
 
 organization := "ca.bwbecker"
 
-scalaVersion := "2.12.0"
+scalaVersion := "2.12.2"
 
-crossScalaVersions := Seq("2.11.8", "2.12.0")
+crossScalaVersions := Seq("2.11.11", "2.12.2")
 
 scalacOptions ++= Seq("-feature",
   "-language:implicitConversions",
@@ -21,23 +21,29 @@ scalacOptions ++= Seq("-feature",
 
 libraryDependencies ++= Seq(
   "org.scala-js" %%% "scalajs-dom" % "0.9.1",
-  "ca.bwbecker" %%% "jsFacadeOptionBuilder" % "0.9-SNAPSHOT"
+  "ca.bwbecker" %%% "jsFacadeOptionBuilder" % "0.9.0"
 )
 
-//jsDependencies += "org.webjars" % "jstree" % "3.2.1" / "jstree.js" minified "jstree.min.js"
 
-//jsDependencies in Test += RuntimeDOM
-
-homepage := Some(url("http://www.querki.net/"))
+homepage := Some(url("https://github.com/bwbecker/jsnlog-facade"))
 
 licenses += ("MIT License", url("http://www.opensource.org/licenses/mit-license.php"))
 
-/*
+
 scmInfo := Some(ScmInfo(
-    url("https://github.com/jducoeur/jstree-facade"),
-    "scm:git:git@github.com:jducoeur/jstree-facade.git",
-    Some("scm:git:git@github.com:jducoeur/jstree-facade.git")))
-*/
+    url("https://github.com/bwbecker/jsnlog-facade"),
+    "scm:git:git@github.com:bwbecker/jsnlog-facade.git",
+    Some("scm:git:git@github.com:bwbecker/jsnlog-facade.git")))
+
+developers := List(
+  Developer(
+    id = "bwbecker",
+    name = "Byron Weber Becker",
+    email = "bwbecker@uwaterloo.ca",
+    url = url("https://github.com/bwbecker")
+  )
+)
+
 
 publishMavenStyle := true
 
@@ -49,14 +55,7 @@ publishTo := {
     Some("releases" at nexus + "service/local/staging/deploy/maven2")
 }
 
-pomExtra := (
-  <developers>
-    <developer>
-      <id>bwbecker</id>
-      <name>Byron Weber Becker</name>
-      <url>https://github.com/bwbecker</url>
-    </developer>
-  </developers>
-  )
+publishArtifact in Test := false
+
 
 pomIncludeRepository := { _ => false }

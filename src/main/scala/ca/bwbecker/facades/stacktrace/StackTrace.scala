@@ -1,7 +1,7 @@
-package facades.stacktrace
+package ca.bwbecker.facades.stacktrace
 
 import ca.bwbecker.facades.builder._
-import facades.stacktrace.StackTrace.StackFrame
+import ca.bwbecker.facades.stacktrace.StackTrace.StackFrame
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSGlobal

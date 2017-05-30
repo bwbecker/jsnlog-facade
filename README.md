@@ -5,8 +5,8 @@ A Scala.js facade for the JSNLog library
 
 JSNLog is a Javascript library for logging messages, either to the browser
 console or back to the web server via an Ajax call or both.  See
-the [JSNLog homepage](http://js.jsnlog.com/) for details.  
-This is a Scala.JS facade for that library.
+the [JSNLog homepage](http://js.jsnlog.com/) for details.  This is a
+Scala.JS facade for that library.
 
 Besides the facade to JSNLog, this library also includes:
 * A facade for [StackTraceJS](https://www.stacktracejs.com/#!/docs/stacktrace-js).  That
@@ -34,7 +34,7 @@ In the demo folder is a Play project that uses jsnlog-facade.  Look for the foll
 
 To use jsnlog-facade, add this line to your libraryDependencies:
 ```
-"ca.bwbecker" %%% "jsnlog-facade" % "0.5"
+"ca.bwbecker" %%% "jsnlog-facade" % "0.1.0"
 ```
 
 You'll also need to have the actual jsnlog and Stacktrace Javascript libraries loaded

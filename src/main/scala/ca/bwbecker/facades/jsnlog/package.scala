@@ -1,7 +1,7 @@
 package ca.bwbecker.facades
 
 
-import facades.stacktrace.StackTrace
+import ca.bwbecker.facades.stacktrace.StackTrace
 
 import scala.util.{Failure, Success}
 
