@@ -6,6 +6,8 @@ import play.api.libs.json._
 
 import com.fasterxml.jackson.core.JsonParseException
 
+import java.time.ZoneOffset
+
 /**
   * Created by bwbecker on 2017-05-23.
   */

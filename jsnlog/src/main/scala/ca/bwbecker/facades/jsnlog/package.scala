@@ -73,10 +73,19 @@ package object jsnlog {
 
     /**
       * Log a message with a severity of ERROR and an associated Throwable with its stacktrace.
+      *
       * @param msg
       * @param t
       */
     def error(msg: String, t: Throwable): Unit = {
+
+      def msgChain(t: Throwable): String = {
+        if (t == null) {
+          ""
+        } else {
+          t.getMessage + "\n\t" + msgChain(t.getCause)
+        }
+      }
 
       StackTrace.fromError(t).toFuture.onComplete {
         case Success(st) ⇒
@@ -85,7 +94,7 @@ package object jsnlog {
             ).mkString("\n  at "))
 
         case Failure(e) ⇒
-          logger.error(s"Error obtaining a stack trace: ${e.getMessage}")
+          logger.error(s"Error obtaining a stack trace: ${msgChain(e)}\n\t${t.getMessage}")
       }
     }
   }

@@ -55,7 +55,7 @@ object ScalaJSExample extends js.JSApp {
     JL().info("Info msg 3")
     JL().warn("Warning msg 1")
     JL().warn("Warning msg 2")
-    JL().info("Info msg 4")
+     JL().info("Info msg 4")
     JL(this.getClass.getName).error("Named logger; Error")
 
 

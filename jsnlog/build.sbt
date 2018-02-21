@@ -5,13 +5,18 @@ name := "JSNLog Facade"
 
 normalizedName := "jsnlog-facade"
 
-version := "0.1.0"
+version := "0.1.2"
 
 organization := "ca.bwbecker"
 
-scalaVersion := "2.12.2"
+scalaVersion := "2.12.4"
 
-crossScalaVersions := Seq("2.11.11", "2.12.2")
+crossScalaVersions := Seq("2.11.11", "2.12.4")
+
+resolvers ++= Seq(
+    "CS-OAT@cs.uwaterloo.ca" at "https://cs.uwaterloo.ca/~cs-oat/maven/"
+    )
+
 
 scalacOptions ++= Seq("-feature",
   "-language:implicitConversions",
@@ -20,8 +25,8 @@ scalacOptions ++= Seq("-feature",
   "-language:postfixOps")
 
 libraryDependencies ++= Seq(
-  "org.scala-js" %%% "scalajs-dom" % "0.9.1",
-  "ca.bwbecker" %%% "jsFacadeOptionBuilder" % "0.9.0"
+  "org.scala-js" %%% "scalajs-dom" % "0.9.2",
+  "ca.bwbecker" %%% "jsFacadeOptionBuilder" % "0.9.3"
 )
 
 
@@ -45,15 +50,14 @@ developers := List(
 )
 
 
-publishMavenStyle := true
 
-publishTo := {
-  val nexus = "https://oss.sonatype.org/"
-  if (isSnapshot.value)
-    Some("snapshots" at nexus + "content/repositories/snapshots")
-  else
-    Some("releases" at nexus + "service/local/staging/deploy/maven2")
-}
+val keyFile: File = Path.userHome / ".ssh" / "oat_rsa"
+
+val publishMavenStyle = true
+
+publishTo in ThisBuild := Some(Resolver.ssh("OAT Lib Cross-platform", "cs.uwaterloo.ca", "/u1/cs-oat/public_html/maven")
+  as("cs-oat", keyFile) withPermissions ("0644"))
+
 
 publishArtifact in Test := false
 
