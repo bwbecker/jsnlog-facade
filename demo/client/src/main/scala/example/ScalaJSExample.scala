@@ -14,35 +14,10 @@ import scala.util.{Failure, Success}
 /**
   * Demo the logging library.
   */
-object ScalaJSExample extends js.JSApp {
-  def main(): Unit = {
+object ScalaJSExample {
 
-    def onError(errorMsg: Event, url: String, lineNumber: Int, column: Int, errorObj: Throwable): Boolean = {
-      JL("onerrorLogger").error("Uncaught exception: ", errorObj)
-      true
-    }
-
-    // Install our own handler for uncaught exceptions.
-    dom.window.onerror = (onError _).asInstanceOf[Function4[Event, String, Int, Int, _]]
-
-    //Use a custom end-point for logging to the server; default is /jsnlog.logger
-    JL.setOptions(GeneralOptions.defaultAjaxUrl("/logError"))
-
-    //Log both to the server and the console.  Default is just the server.
-    JL().setOptions(LoggerOptions.appenders(Seq(
-      JL.createAjaxAppender()
-        .setOptions(AjaxAppenderOptions
-          .bufferSize(3)
-          //.batchSize(3)  no way to send immediately even if haven't reached batch size?
-          .sendWithBufferLevel(ERROR)
-          .storeInBufferLevel(INFO)
-          .level(WARN)
-        ),
-      JL.createConsoleAppender()
-        .setOptions(ConsoleAppenderOptions
-          .level(DEBUG)
-        )
-    )))
+  def main(args: Array[String]): Unit = {
+    this.initJL
 
     // These get put to the console but not the server due to differing levels
     JL().debug("Debug1: Ready to add message to page")
@@ -51,12 +26,13 @@ object ScalaJSExample extends js.JSApp {
     // Info normally doesn't go to the server
     JL().info("Info msg 1")
     // Three info messages are buffered and sent if an error is sent.
+    // This doesn't seem to be working...
     JL().info("Info msg 2")
     JL().info("Info msg 3")
+    JL().info("Info msg 4")
+    JL().error("Named logger; Error")
     JL().warn("Warning msg 1")
     JL().warn("Warning msg 2")
-     JL().info("Info msg 4")
-    JL(this.getClass.getName).error("Named logger; Error")
 
 
     dom.document.getElementById("scalajsShoutOut").textContent = SharedMessages.itWorks
@@ -106,39 +82,46 @@ object ScalaJSExample extends js.JSApp {
     throw new Exception("Uncaught oops...")
 
   }
-}
 
 
-class Test {
-  var i = 0
+  private def initJL: Unit = {
 
-  def test1(): Unit = {
-    i = i + 1
-    this.test2
-    i = i + 1
-  }
+    val errorFunction: js.Function5[String, String, Int, Int, Throwable, Boolean] =
+      (message: String, source: String, line: Int, column: Int, throwable: Throwable) => {
+        JL("onerrorLogger").error("Uncaught exception: ", throwable)
+        true
+      }
 
-  def test2(): Unit = {
-    i = i + 1
-    this.test3
-    i = i + 1
-  }
+    // Install our own handler for uncaught exceptions.
 
-  def test3(): Unit = {
-    i = i + 1
-    this.test4
-    i = i + 1
-  }
+    js.Dynamic.global.window.onerror = errorFunction
 
-  def test4(): Unit = {
-    i = i + 1
-    this.test5
-    i = i + 1
-  }
+    //      def onError(errorMsg: Event, url: String, lineNumber: Int, column: Int, errorObj: Throwable): Boolean = {
+    //        JL("onerrorLogger").error("Uncaught exception: ", errorObj)
+    //        true
+    //      }
 
-  def test5(): Unit = {
-    i = i + 1
-    throw new Exception("Exception in Test5")
-    i = i + 1
+    // Install our own handler for uncaught exceptions.
+    //      dom.window.onerror = (onError _).asInstanceOf[Function4[Event, String, Int, Int, _]]
+
+    //Use a custom end-point for logging to the server; default is /jsnlog.logger
+    JL.setOptions(GeneralOptions.defaultAjaxUrl("/logError"))
+
+    //Log both to the server and the console.  Default is just the server.
+    JL().setOptions(LoggerOptions.appenders(Seq(
+      JL.createAjaxAppender()
+        .setOptions(AjaxAppenderOptions
+          .bufferSize(3)
+          .batchSize(3)  //no way to send immediately even if haven't reached batch size?
+          .sendWithBufferLevel(ERROR)
+          .storeInBufferLevel(INFO)
+          .level(WARN)
+        ),
+      JL.createConsoleAppender()
+        .setOptions(ConsoleAppenderOptions
+          .level(DEBUG)
+        )
+    )))
+
   }
 }

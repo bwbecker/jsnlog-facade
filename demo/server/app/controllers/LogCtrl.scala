@@ -1,17 +1,17 @@
 package controllers
 
-import play.api.mvc._
+
 import play.api.Logger
 import play.api.libs.json._
 
+import javax.inject._
+import play.api.mvc.{Action, _}
+
 import com.fasterxml.jackson.core.JsonParseException
 
-import java.time.ZoneOffset
+@Singleton
+class LogCtrl @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
 
-/**
-  * Created by bwbecker on 2017-05-23.
-  */
-class LogCtrl extends Controller {
 
   implicit private val LogReads = Json.reads[LogMsg]
   implicit private val LogMsgReads = Json.reads[LogBatch]
@@ -67,4 +67,3 @@ class LogCtrl extends Controller {
   private case class LogBatch(r: String, lg: Seq[LogMsg])
 
 }
-

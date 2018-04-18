@@ -1,0 +1,16 @@
+{
+  "name": "jsnlog-facade",
+  "version": "0.2.0",
+  "description": "Scala.js facade for logging to the server.",
+  "private": true,
+  "main": "index.js",
+  "dependencies": {
+    "jsnlog": "^2.26.1",
+    "stacktrace-js": "^2.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {},
+  "repository": {},
+  "author": "",
+  "license": "UNLICENSED"
+}
