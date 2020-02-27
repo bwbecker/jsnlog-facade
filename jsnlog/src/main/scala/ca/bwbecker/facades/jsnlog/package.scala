@@ -2,6 +2,7 @@ package ca.bwbecker.facades
 
 
 import ca.bwbecker.facades.stacktrace.StackTrace
+import scala.scalajs.js
 
 import scala.util.{Failure, Success}
 
@@ -48,8 +49,7 @@ package object jsnlog {
     override def execute(command: Runnable) = scala.scalajs.concurrent.JSExecutionContext.queue.execute(command)
 
     def reportFailure(t: Throwable): Unit = {
-
-      JL("futureLogger").error(this.execChain(t.getCause), t)
+      JL("futureLogger").error(this.execChain(t.getCause), t.asInstanceOf[js.JavaScriptException])
       //scala.scalajs.concurrent.JSExecutionContext.queue.reportFailure(e)
     }
   }
@@ -77,7 +77,7 @@ package object jsnlog {
       * @param msg
       * @param t
       */
-    def error(msg: String, t: Throwable): Unit = {
+    def error(msg: String, t: js.JavaScriptException): Unit = {
 
       def msgChain(t: Throwable): String = {
         if (t == null) {
