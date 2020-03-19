@@ -5,13 +5,13 @@ name := "JSNLog Facade"
 
 normalizedName := "jsnlog-facade"
 
-version := "0.2.0-SNAPSHOT"
+version := "0.2.1"
 
 organization := "ca.bwbecker"
 
-scalaVersion := "2.12.5"
+scalaVersion := "2.12.10"
 
-crossScalaVersions := Seq("2.11.11", scalaVersion.value)
+crossScalaVersions := Seq(scalaVersion.value)
 
 resolvers ++= Seq(
     "CS-OAT@cs.uwaterloo.ca" at "https://cs.uwaterloo.ca/~cs-oat/maven/"
@@ -25,8 +25,8 @@ scalacOptions ++= Seq("-feature",
   "-language:postfixOps")
 
 libraryDependencies ++= Seq(
-  "org.scala-js" %%% "scalajs-dom" % "0.9.5",
-  "ca.bwbecker" %%% "jsFacadeOptionBuilder" % "0.9.3"
+  "org.scala-js" %%% "scalajs-dom" % "1.0.0",
+  "ca.bwbecker" %%% "jsFacadeOptionBuilder" % "0.9.4"
 )
 
 
@@ -55,8 +55,11 @@ val keyFile: File = Path.userHome / ".ssh" / "oat_rsa"
 
 val publishMavenStyle = true
 
-publishTo in ThisBuild := Some(Resolver.ssh("OAT Libraries", "https://cs.uwaterloo.ca/u1/cs-oat/public_html/maven")
-  as("cs-oat", keyFile) /*withPermissions ("0644")*/)
+publishTo in ThisBuild := Some(Resolver.ssh(
+  "OAT Libraries", 
+  "linux.cs.uwaterloo.ca",
+  "/u1/cs-oat/public_html/maven"
+).as("cs-oat", keyFile).withPublishPermissions("0644"))
 
 
 publishArtifact in Test := false
