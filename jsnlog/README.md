@@ -34,7 +34,13 @@ In the demo folder is a Play project that uses jsnlog-facade.  Look for the foll
 
 To use jsnlog-facade, add this line to your libraryDependencies:
 ```
-"ca.bwbecker" %%% "jsnlog-facade" % "0.1.0"
+"ca.bwbecker" %%% "jsnlog-facade" % "0.2.1"
+```
+with a resolver of
+```
+resolvers ++= Seq(
+    "CS-OAT@cs.uwaterloo.ca" at "https://cs.uwaterloo.ca/~cs-oat/maven/"
+    )
 ```
 
 You'll also need to have the actual jsnlog and Stacktrace Javascript libraries loaded

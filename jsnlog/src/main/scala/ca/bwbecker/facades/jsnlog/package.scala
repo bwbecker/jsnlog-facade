@@ -71,6 +71,16 @@ package object jsnlog {
     */
   implicit class RichLogger(val logger: Logger) extends AnyVal {
 
+    /** 
+      * Handle a native ScalaJS error.  Not sure why this isn't being implicitly converted.
+      * I think it used to be.
+      */
+    def error(msg: String, t: Throwable):Unit = {
+      logger.error(msg + ": " + t.getMessage + "\n  at " +
+            t.getStackTrace.filter(sf ⇒ !sf.getFileName.matches(unhelpfulStackFrames)
+            ).mkString("\n  at "))
+    }
+
     /**
       * Log a message with a severity of ERROR and an associated Throwable with its stacktrace.
       *

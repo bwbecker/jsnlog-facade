@@ -66,3 +66,4 @@ publishArtifact in Test := false
 
 
 pomIncludeRepository := { _ => false }
+
