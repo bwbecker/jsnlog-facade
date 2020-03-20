@@ -9,7 +9,7 @@ version := "0.2.1"
 
 organization := "ca.bwbecker"
 
-scalaVersion := "2.12.10"
+scalaVersion := "2.12.11"
 
 crossScalaVersions := Seq(scalaVersion.value)
 
@@ -25,7 +25,7 @@ scalacOptions ++= Seq("-feature",
   "-language:postfixOps")
 
 libraryDependencies ++= Seq(
-  "org.scala-js" %%% "scalajs-dom" % "1.0.0",
+  "org.scala-js" %%% "scalajs-dom" % "0.9.5",
   "ca.bwbecker" %%% "jsFacadeOptionBuilder" % "0.9.4"
 )
 
