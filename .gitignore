@@ -8,3 +8,4 @@ demo/shared/.js
 demo/shared/.jvm
 project/project
 target
+sbt.json

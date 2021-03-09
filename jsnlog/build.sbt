@@ -5,11 +5,11 @@ name := "JSNLog Facade"
 
 normalizedName := "jsnlog-facade"
 
-version := "0.2.2"
+version := "0.2.3"
 
 organization := "ca.bwbecker"
 
-scalaVersion := "2.12.13"
+scalaVersion := "2.13.5"
 
 crossScalaVersions := Seq(scalaVersion.value)
 
@@ -26,7 +26,7 @@ scalacOptions ++= Seq("-feature",
 
 libraryDependencies ++= Seq(
   "org.scala-js" %%% "scalajs-dom" % "1.1.0",
-  "ca.bwbecker" %%% "jsFacadeOptionBuilder" % "0.9.5"
+  "ca.bwbecker" %%% "jsFacadeOptionBuilder" % "0.9.6"
 )
 
 
